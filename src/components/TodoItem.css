@@ -1,0 +1,69 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.todo-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.todo-item span {
+  flex-grow: 1;
+  text-align: left;
+  font-size: 1.1em;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.todo-item.completed span {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.item-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-button,
+.delete-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.edit-button {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
