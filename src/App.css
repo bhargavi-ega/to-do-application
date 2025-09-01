@@ -1,0 +1,187 @@
+/* src/App.css */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f2f5; /* Light grey background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  margin: 0;
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.app-container {
+  background-color: #ffffff; /* White background for the app */
+  padding: 40px;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  width: 100%;
+  max-width: 500px; /* Max width for larger screens */
+  text-align: center;
+  margin: 20px; /* Margin for smaller screens */
+}
+
+.title {
+  font-size: 2.5em;
+  color: #333; /* Dark text color */
+  margin-bottom: 20px;
+  text-transform: uppercase; /* Uppercase title */
+  letter-spacing: 2px; /* Spaced out letters */
+}
+
+/* src/components/TodoForm.css */
+.todo-form {
+  display: flex;
+  gap: 10px; /* Space between input and button */
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  flex-grow: 1; /* Input takes up available space */
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.3s ease-in-out; /* Smooth transition for border */
+}
+
+.todo-input:focus {
+  outline: none; /* Remove default outline */
+  border-color: #4a90e2; /* Blue border on focus */
+}
+
+.add-button {
+  padding: 12px 20px;
+  border: none;
+  background-color: #4a90e2; /* Blue background */
+  color: white;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth transitions */
+}
+
+.add-button:hover {
+  background-color: #3b79d6; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* src/components/TodoList.css */
+.todo-list {
+  list-style: none; /* Remove bullet points */
+  padding: 0;
+  margin: 0;
+}
+
+/* src/components/TodoItem.css */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #f9f9f9; /* Light grey background for items */
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.todo-item:hover {
+  transform: translateY(-3px); /* Slight lift on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* More pronounced shadow on hover */
+}
+
+.todo-item span {
+  flex-grow: 1; /* Text takes up available space */
+  text-align: left;
+  font-size: 1.1em;
+  cursor: pointer; /* Indicates clickable text */
+  padding: 0 10px; /* Padding around text */
+  word-break: break-word; /* Prevents long words from overflowing */
+}
+
+.todo-item.completed span {
+  text-decoration: line-through; /* Strikethrough for completed tasks */
+  color: #888; /* Grey out completed tasks */
+}
+
+.item-buttons {
+  display: flex;
+  gap: 8px; /* Space between buttons */
+}
+
+.edit-input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.1em; /* Match text size */
+}
+
+.edit-button,
+.delete-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.edit-button {
+  background-color: #ffc107; /* Yellow for edit */
+  color: #333;
+}
+
+.edit-button:hover {
+  background-color: #e0a800; /* Darker yellow on hover */
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red for delete */
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .app-container {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .title {
+    font-size: 2em;
+  }
+
+  .todo-form {
+    flex-direction: column;
+  }
+
+  .todo-input, .add-button {
+    width: 100%;
+  }
+
+  .add-button {
+    padding: 10px 15px;
+  }
+
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .todo-item span, .edit-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .item-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
