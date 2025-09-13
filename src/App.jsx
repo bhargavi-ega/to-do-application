@@ -430,8 +430,8 @@ function App() {
           }
 
           .theme-switch svg {
-            width: 26px;
-            height: 26px;
+            width: 30px;
+            height: 24px;
             z-index: 2;
             transition: color 0.3s ease;
           }
