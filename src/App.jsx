@@ -299,6 +299,223 @@ function App() {
       <div className="app-container">
         <style>{`
           /* CSS code from the next code block goes here */
+          :root {
+  /* Light Theme Variables */
+  --font-sans: 'Arial', sans-serif;
+  --bg-gradient: linear-gradient(135deg, #e0f2f7 0%, #c4e0f9 100%);
+  --bg-app: #ffffff;
+  --bg-column: #f7f9fc;
+  --bg-item: #ffffff;
+  --bg-input: #f7f9fc;
+  --bg-button: #457b9d;
+  --bg-button-hover: #3b6b8b;
+  --bg-modal: #ffffff;
+  --bg-switch: #e9e9e9;
+  --bg-slider: #457b9d;
+
+  --text-primary: #2c3e50;
+  --text-secondary: #555;
+  --text-light: #888;
+  --text-button: #ffffff;
+  --icon-active: #ffffff;
+  --icon-inactive: #888;
+  --text-modal-header: #2c3e50;
+  --text-due-date: #6c757d;
+  
+  --border-primary: #a8dadc;
+  --border-secondary: #e0f2f7;
+  --border-focus: #457b9d;
+  --border-overdue: #e74c3c;
+  
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --shadow-focus: rgba(69, 123, 157, 0.3);
+
+  --status-pending: #bdc3c7;
+  --status-in-progress: #3498db;
+  --status-done: #2ecc71;
+  --status-done-bg: #f0fff0;
+}
+
+body.dark {
+  /* Dark Theme Variable Overrides */
+  --bg-gradient: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  --bg-app: #2d3748;
+  --bg-column: #1a202c;
+  --bg-item: #4a5568;
+  --bg-input: #2d3748;
+  --bg-button: #63b3ed;
+  --bg-button-hover: #90cdf4;
+  --bg-modal: #4a5568;
+  --bg-switch: #1a202c;
+  --bg-slider: #63b3ed;
+
+  --text-primary: #e2e8f0;
+  --text-secondary: #a0aec0;
+  --text-light: #718096;
+  --text-button: #1a202c;
+  --icon-active: #ffffff;
+  --icon-inactive: #718096;
+  --text-modal-header: #ffffff;
+  --text-due-date: #a0aec0;
+
+  --border-primary: #4a5568;
+  --border-secondary: #2d3748;
+  --border-focus: #63b3ed;
+  --border-overdue: #fc8181;
+
+  --shadow-light: rgba(0, 0, 0, 0.2);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+  --shadow-focus: rgba(99, 179, 237, 0.4);
+
+  --status-done-bg: #2f855a;
+}
+
+/* General & Layout */
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-gradient);
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  transition: background 0.3s ease;
+}
+
+.app-container {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px var(--shadow-medium);
+  width: 100%;
+  max-width: 1200px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header & Theme Switch */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.title {
+  font-size: 2.8em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.theme-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70px;
+  padding: 4px;
+  border-radius: 50px;
+  background-color: var(--bg-switch);
+  border: 1px solid var(--border-primary);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-switch::before {
+  content: '';
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--bg-slider);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.theme-switch svg {
+  width: 26px;
+  height: 26px;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+/* Light mode styles */
+.theme-switch .sun-icon { 
+  color: var(--icon-active);
+  /* FIX: Nudge sun icon up for perfect vertical alignment */
+  position: relative;
+  top: -1px;
+}
+.theme-switch .moon-icon { color: var(--icon-inactive); }
+.theme-switch::before { 
+  transform: translateX(0px); 
+}
+
+/* Dark mode styles */
+body.dark .theme-switch .sun-icon { color: var(--icon-inactive); }
+body.dark .theme-switch .moon-icon { 
+  color: var(--icon-active);
+}
+body.dark .theme-switch::before { 
+  transform: translateX(30px);
+}
+
+
+/* Controls, Form, Stats Bar */
+.controls-container, .todo-form { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; }
+.search-input, .todo-input, .priority-select, .due-date-input, select { padding: 12px; border: 2px solid var(--border-primary); border-radius: 10px; font-size: 1em; background-color: var(--bg-input); color: var(--text-primary); transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.search-input:focus, .todo-input:focus, .priority-select:focus, .due-date-input:focus, select:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 8px var(--shadow-focus); }
+.search-input { flex-grow: 2; min-width: 200px; }
+.todo-input { flex-grow: 3; min-width: 250px; }
+.add-button, .archive-button { padding: 12px 25px; border: none; background-color: var(--bg-button); color: var(--text-button); border-radius: 10px; font-size: 1em; font-weight: bold; cursor: pointer; transition: all 0.2s ease-in-out; }
+.add-button:hover, .archive-button:hover { background-color: var(--bg-button-hover); transform: translateY(-2px); box-shadow: 0 4px 15px var(--shadow-light); }
+.stats-bar { display: flex; justify-content: space-between; padding: 10px; background-color: var(--bg-column); border-radius: 8px; margin-bottom: 25px; color: var(--text-secondary); font-weight: bold; }
+
+/* Kanban Board & Components */
+.kanban-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.status-column { background-color: var(--bg-column); padding: 15px; border-radius: 12px; display: flex; flex-direction: column; transition: box-shadow 0.3s ease, background-color 0.3s ease; }
+.status-column.drag-over { box-shadow: 0 0 0 3px var(--border-focus); }
+.column-header { font-size: 1.4em; color: var(--text-primary); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid var(--border-primary); font-weight: 600; }
+.todo-list { list-style: none; padding: 0; margin: 0; min-height: 100px; flex-grow: 1; }
+.todo-item { display: flex; align-items: center; justify-content: space-between; padding: 15px; background-color: var(--bg-item); border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 8px var(--shadow-light); border-left: 5px solid transparent; cursor: grab; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, opacity 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; }
+.todo-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow-light); }
+.todo-item.dragging { opacity: 0.5; transform: rotate(3deg); }
+.todo-item .todo-text { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.todo-item.status-pending { border-left-color: var(--status-pending); }
+.todo-item.status-in-progress { border-left-color: var(--status-in-progress); }
+.todo-item.status-done {  border-left-color: var(--status-done); background-color: var(--status-done-bg); }
+.todo-item.status-done .todo-text {  text-decoration: line-through;  color: var(--text-light); }
+.todo-item.overdue { border-left-color: var(--border-overdue); }
+.kebab-menu { position: relative; }
+.kebab-button { background: none; border: none; font-size: 1.8em; cursor: pointer; color: var(--text-light); padding: 0 5px; }
+.kebab-dropdown { position: absolute; background-color: var(--bg-app); min-width: 120px; box-shadow: 0px 8px 16px 0px var(--shadow-medium); z-index: 10; right: 0; border-radius: 8px; overflow: hidden; padding: 5px 0; }
+.kebab-dropdown button { color: var(--text-primary); padding: 10px 16px; display: block; width: 100%; text-align: left; border: none; background: none; cursor: pointer; font-size: 0.95em; }
+.kebab-dropdown button:hover { background-color: var(--bg-column); }
+
+/* Archive Modal */
+.modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+.modal-content { background-color: var(--bg-modal); padding: 25px; border-radius: 12px; width: 90%; max-width: 600px; max-height: 80vh; display: flex; flex-direction: column; border: 1px solid var(--border-primary); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-primary); padding-bottom: 15px; margin-bottom: 15px; }
+.modal-header h2 { color: var(--text-modal-header); }
+.close-button { background: none; border: none; font-size: 2em; cursor: pointer; color: var(--text-light); }
+.archived-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; }
+.archived-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 8px; border: 1px solid var(--border-primary); margin-bottom: 10px; }
+.archived-item-actions button { margin-left: 10px; padding: 6px 12px; border-radius: 6px; cursor: pointer; border: 1px solid var(--border-primary); background-color: transparent; color: var(--text-primary); }
+.archived-item-actions button:hover { background-color: var(--bg-column); }
+.empty-archive-message { color: var(--text-secondary); text-align: center; padding: 20px; }
+.archived-item-text { color: var(--text-primary); }
+
+/* Other Minor Styles */
+.priority-tag { padding: 4px 8px; border-radius: 5px; font-size: 0.8em; font-weight: bold; color: white; white-space: nowrap; }
+.priority-tag.low { background-color: #3498db; } .priority-tag.medium { background-color: #f39c12; } .priority-tag.high { background-color: #e74c3c; } .priority-tag.none { background-color: #bdc3c7; color: #333; }
+.due-date { font-size: 0.9em; color: var(--text-due-date); white-space: nowrap; }
+.empty-list-message { color: var(--text-light); font-style: italic; padding: 20px; text-align: center; border: 2px dashed var(--border-primary); border-radius: 8px; }
+.edit-input { flex-grow: 1; padding: 8px; border: 1px solid var(--border-primary); border-radius: 6px; font-size: 1.1em; background-color: var(--bg-input); color: var(--text-primary); }
+body.dark .todo-item.status-done .todo-text { color: #c6f6d5; }
         `}</style>
 
         <header className="app-header">
